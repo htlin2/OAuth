@@ -18,7 +18,21 @@ function getTodoList(userId, callback) {
     }
   });
 }
+const query = `INSERT INTO groceries (item, quantity) VALUES (?, ?)`;
+
+function insertTodoList(userId, enteredItem, callback) {
+  console.log(userId, enteredItem)
+  const queryStr = `INSERT INTO todos (users_id, todo) VALUES (${userId}, "${enteredItem}")`;
+  connection.query(queryStr, (error, results) => {
+    if (error) {
+      callback(error, null);
+    } else {
+      callback(null, results);
+    }
+  });
+}
 
 module.exports = {
   getTodoList,
+  insertTodoList,
 }

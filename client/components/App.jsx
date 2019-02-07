@@ -25,7 +25,13 @@ class App extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
+    let userId = 1;
+    fetch(`/todos/${userId}`, {
+      method: 'POST',
+      body: JSON.stringify({ enteredItem: this.state.enteredItem }),
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .catch(error => console.log(error));
   }
 
   handleItemInput(e) {
