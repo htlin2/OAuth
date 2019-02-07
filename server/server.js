@@ -9,7 +9,15 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/../public')));
 
-app.get('/', (req, res) => {
+app.get('/todos/:userId', (req, res) => {
+  const { userId } = req.params;
+  db.getTodoList(userId, (error, results) => {
+    if (error) {
+      res.status(400).send(error);
+    } else {
+      res.status(200).send(results);
+    }
+  })
 });
 
 app.listen(PORT, () => {
