@@ -18,7 +18,6 @@ function getTodoList(userId, callback) {
     }
   });
 }
-const query = `INSERT INTO groceries (item, quantity) VALUES (?, ?)`;
 
 function insertTodoList(userId, enteredItem, callback) {
   console.log(userId, enteredItem)
@@ -35,4 +34,4 @@ function insertTodoList(userId, enteredItem, callback) {
 module.exports = {
   getTodoList,
   insertTodoList,
-}
+};
