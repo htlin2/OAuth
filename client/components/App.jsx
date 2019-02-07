@@ -8,24 +8,23 @@ class App extends React.Component {
       enteredItem: '',
     }
 
-    this.getTodos = this.getTodos.bind(this);
+    this.handleGetRequest = this.handleGetRequest.bind(this);
+    this.handlePostRequest = this.handlePostRequest.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleItemInput = this.handleItemInput.bind(this);
   }
 
   componentDidMount() {
-    this.getTodos();
+    this.handleGetRequest();
   }
 
-  getTodos(userId = 1) {
+  handleGetRequest(userId = 1) {
     fetch(`/todos/${userId}`)
       .then(response => response.json())
       .then(data => this.setState({ data }));
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    let userId = 1;
+  handlePostRequest(userId) {
     fetch(`/todos/${userId}`, {
       method: 'POST',
       body: JSON.stringify({ enteredItem: this.state.enteredItem }),
@@ -34,11 +33,25 @@ class App extends React.Component {
       .catch(error => console.log(error));
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+    let userId = 1;
+    this.handlePostRequest(userId);
+    this.handleGetRequest(userId);
+    this.setState({ enteredItem: '' });
+  }
+
   handleItemInput(e) {
     this.setState({ enteredItem: e.target.value });
   }
 
   render() {
+    const renderList = this.state.data.map(ele => {
+      const { todo } = ele;
+      return (
+        <li key={ele.id}>{todo}</li>
+      )
+    });
     return (
       <div className="container">
         <div className="containerLeft">
@@ -48,6 +61,7 @@ class App extends React.Component {
             <input type="submit" />
           </form>
         </div>
+        {renderList}
       </div>
     )
   }
