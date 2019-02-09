@@ -1,4 +1,5 @@
 import React from 'react';
+import Login from './Login.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -6,6 +7,7 @@ class App extends React.Component {
     this.state = {
       data: [],
       enteredItem: '',
+      isAuthenticated: false,
     }
 
     this.handleGetRequest = this.handleGetRequest.bind(this);
@@ -62,6 +64,7 @@ class App extends React.Component {
           </form>
         </div>
         {renderList}
+        <Login />
       </div>
     )
   }

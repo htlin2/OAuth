@@ -20,7 +20,6 @@ function getTodoList(userId, callback) {
 }
 
 function insertTodoList(userId, enteredItem, callback) {
-  console.log(userId, enteredItem)
   const queryStr = `INSERT INTO todos (users_id, todo) VALUES (${userId}, "${enteredItem}")`;
   connection.query(queryStr, (error, results) => {
     if (error) {
