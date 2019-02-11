@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/../public')));
 
-app.get('/todos/:userId', (req, res) => {
+app.get('/api/todos/:userId', (req, res) => {
   const { userId } = req.params;
   db.getTodoList(userId, (error, results) => {
     if (error) {
@@ -20,7 +20,7 @@ app.get('/todos/:userId', (req, res) => {
   })
 });
 
-app.post('/todos/:userId', (req, res) => {
+app.post('/api/todos/:userId', (req, res) => {
   const userId = Number(req.params.userId);
   const { enteredItem } = req.body;
   db.insertTodoList(userId, enteredItem, (error, results) => {
@@ -30,6 +30,10 @@ app.post('/todos/:userId', (req, res) => {
       res.status(200).end();
     }
   })
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/../public/'));
 });
 
 app.listen(PORT, () => {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Auth } from "aws-amplify";
 
 class Login extends React.Component {
   constructor(props) {
@@ -22,8 +23,14 @@ class Login extends React.Component {
     });
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault();
+    try {
+      await Auth.signIn(this.state.email, this.state.password);
+      alert("Logged in");
+    } catch (error) {
+      alert(error.message)
+    }
   }
 
   render() {
