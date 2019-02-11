@@ -3,23 +3,23 @@ import ReactDOM from 'react-dom';
 import App from './components/App.jsx';
 import Amplify from 'aws-amplify';
 
-const config = require('../config.js');
+const { apiGateway, cognito } = require('../config.js');
 
 Amplify.configure({
   Auth: {
     mandatorySignIn: true,
-    region: config.cognito.REGION,
-    userPoolId: config.cognito.USER_POOL_ID,
-    identityPoolId: config.cognito.IDENTITY_POOL_ID,
-    userPoolWebClientId: config.cognito.APP_CLIENT_ID,
+    region: cognito.REGION,
+    userPoolId: cognito.USER_POOL_ID,
+    identityPoolId: cognito.IDENTITY_POOL_ID,
+    userPoolWebClientId: cognito.APP_CLIENT_ID,
   },
   API: {
     endpoints: [{
-      name: config.apiGateway.NAME,
-      endpoint: config.apiGateway.URL,
-      region: config.apiGateway.REGION,
-    },]
-  }
+      name: apiGateway.NAME,
+      endpoint: apiGateway.URL,
+      region: apiGateway.REGION,
+    }]
+  },
 });
 
 ReactDOM.render(<App />, document.getElementById('app'));
