@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/../public')));
 
-app.get('/api/todos/:userId', (req, res) => {
+app.get('/api/list/:userId', (req, res) => {
   const { userId } = req.params;
   db.getTodoList(userId, (error, results) => {
     if (error) {
@@ -20,7 +20,7 @@ app.get('/api/todos/:userId', (req, res) => {
   })
 });
 
-app.post('/api/todos/:userId', (req, res) => {
+app.post('/api/list/:userId', (req, res) => {
   const userId = Number(req.params.userId);
   const { enteredItem } = req.body;
   db.insertTodoList(userId, enteredItem, (error, results) => {

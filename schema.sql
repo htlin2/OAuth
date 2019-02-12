@@ -15,3 +15,5 @@ CREATE TABLE todos (
 -- insert test values
 INSERT INTO users (userId) VALUES ("aaaaaa"), ("bbbbbb"), ("cccccc");
 INSERT INTO todos (users_id, todo) VALUES (1, "this is my first todo");
+INSERT INTO todos (users_id, todo) VALUES (2, "from user2 list");
+INSERT INTO todos (users_id, todo) VALUES (3, "user3 list here....");

@@ -1,11 +1,12 @@
 const mysql = require('mysql');
-const { dbPassword } = require('../config.js');
+const { dbEndpoint, dbPort, dbUser, dbPassword, dbDatabase } = require('../config.js');
 
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
+  host: dbEndpoint,
+  port: dbPort,
+  user: dbUser,
   password: dbPassword,
-  database: 'oauth',
+  database: dbDatabase,
 });
 
 function getTodoList(userId, callback) {

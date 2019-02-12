@@ -20,13 +20,13 @@ class Todo extends React.Component {
   }
 
   handleGetRequest(userId = 1) {
-    fetch(`/api/todos/${userId}`)
+    fetch(`https://6myuu5upwb.execute-api.us-east-1.amazonaws.com/prod/api/list/?userId=${userId}`)
       .then(response => response.json())
       .then(data => this.setState({ data }));
   }
 
   handlePostRequest(userId) {
-    fetch(`/api/todos/${userId}`, {
+    fetch(`/api/list/${userId}`, {
       method: 'POST',
       body: JSON.stringify({ enteredItem: this.state.enteredItem }),
       headers: { 'Content-Type': 'application/json' },
